@@ -327,6 +327,33 @@ nav {
   50% { opacity: 1; transform: scale(1.3) rotate(15deg); }
 }
 
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button:disabled{
+    cursor:not-allowed;
+    opacity:0.8;
+}
+
 /* ============================================================
    TRUST RIBBON
    Dark purple bar with quick-trust stats
@@ -1681,8 +1708,8 @@ footer {
         <div class="form-nav" style="margin-top:28px;">
           <button class="btn-form-back" onclick="prevStep(4)">← Back</button>
           <!-- Final submit button -->
-          <button class="btn-form-next" onclick="submitForm()" style="background:#F6C23E;color:#2D3748;">
-            ✨ Start My Child's Story
+          <button id="submitBtn" class="btn btn-primary" onclick="submitForm()">
+             Create My Storybook
           </button>
         </div>
         <p class="form-reassurance">🔒 Your photo is kept safe and only used to create your book.</p>
@@ -1821,81 +1848,55 @@ function handleUpload(e) {
 }
 
 // ——— FORM SUBMISSION
-let isSubmitting = false;
-
 async function submitForm() {
 
-    // Prevent multiple clicks
-    if (isSubmitting) return;
+  const selectedBook = document.querySelector('.book-type-option.selected');
 
-    isSubmitting = true;
+  const data = {
+    parentName: document.getElementById('parentName').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    childName: document.getElementById('childName').value,
+    childAge: document.getElementById('childAge').value,
+    bookTheme: selectedBook
+      ? selectedBook.querySelector('.book-type-label').innerText
+      : "",
+    message:
+      "Favourite Colour: " + document.getElementById('favColour').value +
+      ", Favourite Animal: " + document.getElementById('favAnimal').value
+  };
 
-    const submitBtn = document.getElementById("submitBtn");
+  try {
 
-    submitBtn.disabled = true;
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwReWX4_VpSaCiwCVIGrIE-FQUbm5U5ldhsqkd2_dSOLET4JIIFgP0vR37NTbrfpULokQ/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(data)
+      }
+    );
 
-    submitBtn.innerHTML = `
-        <span class="spinner"></span>
-        📖 Creating your personalized book...
-    `;
+    const result = await response.json();
 
-    const selectedBook = document.querySelector('.book-type-option.selected');
+    if(result.status === "success"){
 
-    const data = {
-        parentName: document.getElementById('parentName').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        childName: document.getElementById('childName').value,
-        childAge: document.getElementById('childAge').value,
-        bookTheme: selectedBook
-            ? selectedBook.querySelector('.book-type-label').innerText
-            : "",
-        message:
-            "Favourite Colour: " +
-            document.getElementById('favColour').value +
-            ", Favourite Animal: " +
-            document.getElementById('favAnimal').value
-    };
+      document.getElementById('step-4').style.display='none';
+      document.getElementById('formSuccess').style.display='block';
+      document.querySelector('.form-steps-indicator').style.display='none';
 
-    try {
+    }else{
 
-        const response = await fetch(
-            "https://script.google.com/macros/s/AKfycbwReWX4_VpSaCiwCVIGrIE-FQUbm5U5ldhsqkd2_dSOLET4JIIFgP0vR37NTbrfpULokQ/exec",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }
-        );
+      alert("Something went wrong.");
 
-        const result = await response.json();
-
-        if (result.status === "success") {
-
-            document.getElementById('step-4').style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
-            document.querySelector('.form-steps-indicator').style.display = 'none';
-
-        } else {
-
-            throw new Error(result.message || "Unknown Error");
-
-        }
-
-    } catch (err) {
-
-        console.error(err);
-
-        alert("Something went wrong. Please try again.");
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML = "Create My Storybook";
-
-        isSubmitting = false;
     }
+
+  } catch(err){
+
+    console.error(err);
+    alert("Unable to submit form.");
+
+  }
+
 }
 
 // ——— FAQ ACCORDION ———
