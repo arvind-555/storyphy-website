@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/chrome/Header";
+import { Footer } from "@/components/chrome/Footer";
+import { StickyMobileBar } from "@/components/chrome/StickyMobileBar";
+import { WhatsAppFab } from "@/components/chrome/WhatsAppFab";
 
 const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-fredoka" });
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
@@ -16,7 +20,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
-      <body>{children}</body>
+      <body className="pb-20 md:pb-0">
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <StickyMobileBar />
+        <WhatsAppFab />
+      </body>
     </html>
   );
 }
