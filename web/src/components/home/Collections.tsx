@@ -19,7 +19,7 @@ export function Collections() {
               id={c.imageId}
               label={`${c.title} cover`}
               alt={`${c.title} storybook cover`}
-              aspect="aspect-[4/5]"
+              aspect="aspect-square"
             />
             <div className="mt-4 flex flex-1 flex-col">
               <p className="text-xs font-bold uppercase tracking-widest text-brand-teal">{c.ages}</p>
