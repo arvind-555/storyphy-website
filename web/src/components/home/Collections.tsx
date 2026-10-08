@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { collections } from "@/content/home";
 import { orderMessage, whatsappLink } from "@/config/site";
+import { mediaSrc } from "@/content/media";
 
 export function Collections() {
   return (
@@ -17,6 +18,8 @@ export function Collections() {
           <li key={c.slug} className="flex flex-col rounded-3xl border border-line bg-white p-4 shadow-sm">
             <ImageSlot
               id={c.imageId}
+              src={mediaSrc(c.imageId)}
+              sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
               label={`${c.title} cover`}
               alt={`${c.title} storybook cover`}
               aspect="aspect-square"

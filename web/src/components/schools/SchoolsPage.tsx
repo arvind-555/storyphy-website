@@ -4,6 +4,7 @@ import { ImageSlot } from "@/components/media/ImageSlot";
 import { VideoSlot } from "@/components/media/VideoSlot";
 import { Faq } from "@/components/home/Faq";
 import { whatsappLink } from "@/config/site";
+import { mediaSrc } from "@/content/media";
 import {
   foundingOffer,
   sampleKit,
@@ -29,7 +30,7 @@ export function SchoolsPage() {
               <Button href="#sample-kit" variant="secondary" size="lg">{schoolsHero.secondaryCta}</Button>
             </div>
           </div>
-          <ImageSlot id="IMG-50" label="Teacher and children with their personalized books" alt="A teacher and children with their personalized books" aspect="aspect-[4/3]" priority />
+          <ImageSlot id="IMG-50" src={mediaSrc("IMG-50")} label="Teacher and children with their personalized books" alt="A teacher and children with their personalized books" aspect="aspect-[4/3]" priority />
         </div>
       </section>
 
@@ -91,7 +92,7 @@ export function SchoolsPage() {
           <div className="grid grid-cols-3 gap-3">
             <ImageSlot id="IMG-51" label="Sample kit contents" alt="Sample kit contents" aspect="aspect-square" />
             <ImageSlot id="IMG-52" label="Sample book in hand" alt="Sample book in hand" aspect="aspect-square" />
-            <ImageSlot id="IMG-53" label="Consent form and info sheet" alt="Consent form and info sheet" aspect="aspect-square" />
+            <ImageSlot id="IMG-53" src={mediaSrc("IMG-53")} label="Consent form and info sheet" alt="Consent form and info sheet" aspect="aspect-square" />
           </div>
         </div>
         <div className="mt-8 text-center">

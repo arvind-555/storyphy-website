@@ -8,6 +8,7 @@ export function ImageSlot({
   aspect = "aspect-[4/3]",
   className = "",
   priority = false,
+  sizes = "(min-width: 1024px) 50vw, 100vw",
 }: {
   id: string;
   label: string;
@@ -16,6 +17,7 @@ export function ImageSlot({
   aspect?: string;
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }) {
   if (src) {
     return (
@@ -24,7 +26,7 @@ export function ImageSlot({
           src={src}
           alt={alt}
           fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
+          sizes={sizes}
           loading={priority ? "eager" : "lazy"}
           className="object-cover"
         />
