@@ -1,6 +1,7 @@
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { whyReading } from "@/content/home";
+import { mediaSrc } from "@/content/media";
 
 export function WhyReading() {
   return (
@@ -8,6 +9,7 @@ export function WhyReading() {
       <div className="grid items-center gap-10 md:grid-cols-2">
         <ImageSlot
           id="IMG-13"
+          src={mediaSrc("IMG-13")}
           label="A delighted child spotting their own name in a storybook"
           alt="A child delighted to find their own name in a storybook"
           aspect="aspect-[4/5]"

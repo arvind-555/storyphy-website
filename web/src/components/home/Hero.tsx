@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { hero } from "@/content/home";
 import { orderHref } from "@/config/site";
+import { mediaSrc } from "@/content/media";
 
 export function Hero() {
   return (
@@ -37,8 +38,9 @@ export function Hero() {
         </div>
         <ImageSlot
           id="IMG-01"
+          src={mediaSrc("IMG-01")}
           label="Fanned book covers with a joyful child on a brand-colour burst"
-          alt="Personalized Storyphy storybooks fanned out beside a happy child"
+          alt="A happy child holding a personalized Storyphy storybook with more books fanned out behind"
           aspect="aspect-square"
           priority
         />

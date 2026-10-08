@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { ImageSlot } from "@/components/media/ImageSlot";
 import { schoolsBand } from "@/content/home";
+import { mediaSrc } from "@/content/media";
 
 export function SchoolsBand() {
   return (
@@ -20,7 +21,7 @@ export function SchoolsBand() {
             <Button href="/schools#sample-kit" variant="onDark" size="lg">{schoolsBand.secondaryCta}</Button>
           </div>
         </div>
-        <ImageSlot id="IMG-37" label="Classroom of children with their books" alt="Children in a classroom holding their personalized books" aspect="aspect-[4/3]" />
+        <ImageSlot id="IMG-37" src={mediaSrc("IMG-37")} label="Classroom of children with their books" alt="Children in a classroom holding their personalized books" aspect="aspect-[4/3]" />
       </div>
     </Section>
   );

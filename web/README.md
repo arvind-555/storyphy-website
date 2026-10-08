@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Storyphy website (Next.js)
 
-## Getting Started
+## Run
+    npm install
+    npm run dev      # http://localhost:3000
+    npm test         # unit and component tests, including copy rules
+    npm run build
 
-First, run the development server:
+## Fill in before launch
+- Prices: search `src/content` for `[PRICE-`.
+- Parent stories (real, permissioned only): `parentStories` in `src/content/home.ts`.
+- Founding-school offer: `[FOUNDING-OFFER]` in `src/content/schools.ts`.
+- Images and videos: each placeholder shows its ID (IMG-xx, VID-xx). Put the file in `public/media/` and pass `src` to the matching `ImageSlot` / `VideoSlot`.
+- Do not add star ratings, a minimum order, school logos, or a refund/redesign promise. `src/content/copy-rules.test.ts` fails if they appear.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy (Vercel)
+Project Settings > Build and Deployment: Root Directory `web`, Framework Preset Next.js, no Build Command or Output Directory overrides. To roll back to the old static site, clear the Root Directory and redeploy.

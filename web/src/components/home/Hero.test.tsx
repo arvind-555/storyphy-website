@@ -21,8 +21,8 @@ describe("Hero", () => {
     expect(screen.getByText("Photos handled securely")).toBeInTheDocument();
     expect(screen.getByText("Delivered in 7-10 days")).toBeInTheDocument();
   });
-  it("has the hero image slot", () => {
-    const { container } = render(<Hero />);
-    expect(container.querySelector('[data-slot="IMG-01"]')).toBeInTheDocument();
+  it("shows the hero image", () => {
+    render(<Hero />);
+    expect(screen.getByRole("img", { name: /happy child holding a personalized storyphy/i })).toBeInTheDocument();
   });
 });
